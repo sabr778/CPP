@@ -11,17 +11,14 @@ public:
         if (array.empty()) return *new vector<int>();
         for (int count = 1; count < array.size(); count++)
         {
-            auto j = array.begin();
-            while (j < array.begin()+count)
+            int key = array[count];
+            int j = count-1;
+            while (j >=0 && array[j] >= key) 
             {
-                if (*j > array[count])
-                    break;
-                j++;
+                array[j+1] = array[j];
+                j--;
             }
-            for (auto i = array.begin()+count; i > j; i--) // made mistake here: shouldn't be >=
-            {
-                iter_swap(i, i-1);
-            }
+            array[j+1] = key;
         }
         return array;
     }
