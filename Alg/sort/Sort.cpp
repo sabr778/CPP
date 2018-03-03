@@ -35,7 +35,45 @@ private:
         }
     }
 
+    vector<int>::iterator partition(vector<int> array, vector<int>::iterator low, vector<int>::iterator high)
+    {
+        int value = *low;
+        while (low < high)
+        //from wiki -> should swap the inverted pair(low, high). Low is the one greater than or equal to, and high is the one less than or equal to.
+        {
+            while (*low < value && low < high)
+            {
+                low++;
+            }
+            while (*high > value && low < high)
+            {
+                high--;
+            }
+            if (low >= high)
+                return high;
+            iter_swap(low, high);
+        }
+        return high;
+    }
+
+    void quickSortHelper(vector<int> array, vector<int>::iterator low, vector<int>::iterator high)
+    {
+        if (low < high)
+        {
+            auto pivotIndex = partition(array, low, high);
+            quickSortHelper(array, low, pivotIndex-1);
+            quickSortHelper(array, pivotIndex+1, high);
+        }
+    }
+
 public:
+    vector<int> quickSort(vector<int> array)
+    {
+        if (array.empty()) return *new vector<int>;
+        quickSortHelper(array, array.begin(), array.end()-1);
+        return array;
+    }
+
     vector<int> mergeSort(vector<int> array)
     {
         if (array.empty()) return *new vector<int>;
