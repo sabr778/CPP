@@ -67,6 +67,30 @@ private:
     }
 
 public:
+    vector<int> rainbowSort(vector<int> array) 
+    // put the negative numbers in left, 0s in middle and positive numbers in right.
+    // indeed it's quick sort partition
+    {
+        auto neg = array.begin();
+        auto zero = neg;
+        auto pos = array.end()-1;
+        while (zero <= pos)// equal is important as the index of zero points to unknown number
+        {
+            while (*pos > 0)
+            {
+                pos--;
+            }
+            if (*zero == 0)
+                zero++;
+            else if (*zero < 0)
+            {
+                iter_swap(neg++, zero++);
+            }
+            else iter_swap(zero, pos--);
+        }
+        return array;
+    }
+
     vector<int> quickSort(vector<int> array)
     {
         if (array.empty()) return *new vector<int>;
