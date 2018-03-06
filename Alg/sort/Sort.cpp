@@ -69,7 +69,7 @@ private:
 public:
     vector<int> rainbowSort(vector<int> array) 
     // put the negative numbers in left, 0s in middle and positive numbers in right.
-    // indeed it's quick sort partition
+    // indeed it's quick sort partition assuming no need to keep the original order.
     {
         auto neg = array.begin();
         auto zero = neg;
@@ -77,16 +77,34 @@ public:
         while (zero <= pos)// equal is important as the index of zero points to unknown number
         {
             while (*pos > 0)
-            {
                 pos--;
-            }
-            if (*zero == 0)
+            while (*zero == 0)
                 zero++;
-            else if (*zero < 0)
+            if (zero > pos)
+                break;
+            if (*zero < 0)
             {
                 iter_swap(neg++, zero++);
             }
             else iter_swap(zero, pos--);
+        }
+        return array;
+    }
+
+    vector<int> moveZero(vector<int> array) 
+    // move 0s to the end assuming no need to keep the original order.
+    {
+        auto left = array.begin();
+        auto right = array.end()-1;
+        while (left <= right)
+        {
+            while (*left != 0)
+                left++;
+            while (*right == 0)
+                right--;
+            if (left > right)
+                break;
+            iter_swap(left++, right--);
         }
         return array;
     }
