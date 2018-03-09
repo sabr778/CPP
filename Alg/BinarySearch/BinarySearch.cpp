@@ -64,4 +64,31 @@ public:
         return abs(*left - target) <= abs(*right - target) ? left - input.begin() : right - input.begin();
     }
 
+    vector<int> kClosest(vector<int> array, int target, int k) 
+    {
+        //assume array is not empty, and 0 <= k <= array.size()
+        vector<int> ret = vector<int>(k);
+        if (k == 0) return ret;
+        int pivot = findClosest(array, target);
+        ret[0] = *(array.begin() + pivot);
+        auto left = array.begin() + pivot-1;
+        auto right = array.begin() + pivot+1;
+        int i = 1;
+        while (i < k && left >= array.begin() && right < array.end())
+        {
+            if (abs(*left - target) <= abs(*right - target))
+                ret[i++] = *(left--);
+            else ret[i++] = *(right++);
+        }
+        while (i < k && left >= array.begin())
+        {
+            ret[i++] = *(left--);
+        }
+        while (i < k && right < array.end())
+        {
+            ret[i++] = *(right++);
+        }
+        return ret;
+    }
+
 };
