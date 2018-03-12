@@ -56,8 +56,6 @@ public:
       return 0;
   }
 
-
-
 private:
   int calc(int operand1, int operand2, string op)
   {
