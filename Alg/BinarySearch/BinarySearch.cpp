@@ -91,4 +91,40 @@ public:
         return ret;
     }
 
+    // class UnknownSizeVector {
+    //  public:
+    //   int get(int index) {
+    //     // Return INT_MIN if out of bound,
+    //     // otherwise return the element value.
+    //   }
+    // }
+
+    //Given an integer dictionary A of unknown size, where the numbers in the dictionary are sorted in ascending order, determine if a given target integer T is in the dictionary. Return the index of T in A, return -1 if T is not in A.
+    int searchUnknownSizeArray(UnknownSizeVector input, int target) 
+    {
+        if (input.get(0) == target)
+            return 0;
+        int left = 1, right = 10;
+        while (input.get(right) < target && input.get(right) != INT_MIN)
+        {
+            left = right;
+            right *= 10;
+        }
+        while (left <= right)
+        {
+            int mid = left + (right - left)/2;
+            if (input.get(mid) == target) return mid;
+            if (input.get(mid) == INT_MIN || input.get(mid) > target) right = mid-1;
+            else left = mid+1;
+        }
+        return -1;
+    }
+
+    //Given a target integer T and an integer array A, A is sorted in ascending order first, then shifted by an arbitrary number of positions.
+    //For Example, A = {3, 4, 5, 1, 2} (shifted left by 2 positions). Find the index i such that A[i] == T or return -1 if there is no such index.
+    int search(vector<int> input, int target) 
+    {
+
+    }
+
 };
