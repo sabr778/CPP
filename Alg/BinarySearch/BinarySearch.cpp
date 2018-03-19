@@ -17,7 +17,6 @@ public:
     	return -1;
   	}
 
-
   	int firstOccur(vector<int> input, int target) 
   	{
         //If found duplicated return the index of the firstly occurred, otherwise return -1.
@@ -120,11 +119,53 @@ public:
         return -1;
     }
 
+    int classic(vector<int> input, int left, int right, int target)
+    {
+        while (left <= right)
+        {
+            auto mid = input.begin() + left + (right - left)/2;
+            if (*mid == target) return mid - input.begin();
+            if (*mid < target) left = mid- input.begin()+1;
+            else right = mid- input.begin()-1;
+        }
+        return -1;
+    }
+
+    int findPivot(vector<int> input)
+    {
+        if (*(input.begin()) < *(input.end()-1)) return input.size()-1;
+        int left = 0;
+        int right = input.size()-1;
+        while (left <= right)
+        {
+            int middle = left + (right - left)/2;
+            auto mid = input.begin() + middle;
+            if (*mid > *(mid+1)) return middle;
+            if (*mid < *(input.begin()+ right)) right = middle -1;
+            else left = middle +1; 
+        }
+        return left;
+    }
+
     //Given a target integer T and an integer array A, A is sorted in ascending order first, then shifted by an arbitrary number of positions.
     //For Example, A = {3, 4, 5, 1, 2} (shifted left by 2 positions). Find the index i such that A[i] == T or return -1 if there is no such index.
-    int search(vector<int> input, int target) 
+    int searchShiftSortedArray(vector<int> input, int target) 
     {
-
+        if (input.empty()) return -1;
+        int left, right;
+        if (*(input.begin()) == target) return 0;
+        int pivotIndex = findPivot(input);
+        if (*(input.begin()) < target)
+        {
+            left = 1;
+            right = pivotIndex;
+        }
+        else 
+        {
+            left = pivotIndex+1;
+            right = input.size()-1;
+        }
+        return classic(input, left, right, target);
     }
 
 };
