@@ -26,14 +26,14 @@ public:
     	return temp*temp;
   }
 
-  //Valid operators are +, -, , /.
+  //Valid operators are +, -, *, /.
   //Each operand may be an integer or another expression.
   //Examples:
-  //["2", "1", "+", "3", ""] -> ((2 + 1) * 3) -> 9
+  //["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9
   //["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
   int evalRPN(vector<string> tokens)
   {
-      unordered_set<string> operators = unordered_set<string>( {"", "+", "-", "/"} );
+      unordered_set<string> operators = unordered_set<string>( {"*", "+", "-", "/"} );
       stack<string> stack;
       for (auto token = tokens.begin(); token < tokens.end(); token++)
       {
@@ -63,7 +63,7 @@ private:
           return operand1 + operand2;
       if (op == "-")
           return operand2 - operand1;
-      if (op.empty())
+      if (op == "*")
           return operand1 * operand2;
       if (op == "/")
           return operand2 / operand1;
