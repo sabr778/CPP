@@ -168,4 +168,33 @@ public:
         return classic(input, left, right, target);
     }
 
+    //Synopsis: Given an array A[0]...A[n-1] of integers, find out the length of the longest ascending subsequence.
+    //Assumptions: A is not null
+    //Examples: Input: A = {5, 2, 6, 3, 4, 7, 5} Output: 4 Because [2, 3, 4, 5] is the longest ascending subsequence.
+    int longest(vector<int> array) 
+    {
+
+    }
+
+
+    //Synopsis: Given an integer array A, A is sorted in ascending order first then shifted by an arbitrary number of positions, For Example, A = {3, 4, 5, 1, 2} (shifted left by 2 positions). Find the index of the smallest number.
+    //Assumptions: There are no duplicate elements in the array
+    //Example1: A = {3, 4, 5, 1, 2}, return 3
+    //Example2: A = {1, 2, 3, 4, 5}, return 0
+    //Corner case: What if A is null or A is of zero length? We should return -1 in this case.
+    int shiftPosition(vector<int> array) 
+    {
+        
+    }
+
+
+    //Synopsis: Given a target integer T and an integer array A sorted in ascending order, Find the total number of occurrences of T in A.
+    //Example1: A = {1, 2, 3, 4, 5}, T = 3, return 1
+    //Example2: A = {1, 2, 2, 2, 3}, T = 2, return 3
+    //Example3: A = {1, 2, 2, 2, 3}, T = 4, return 0
+    int totalOccurrence(vector<int> array, int target) 
+    {
+        
+    }
+
 };
